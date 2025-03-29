@@ -46,21 +46,34 @@ const BookTable = () => {
         <div className="container mt-4">
             <Form className="mb-3 d-flex gap-3">
                 <Form.Group>
-                    <Form.Label>Seed</Form.Label>
-                    <Form.Control
-                        type="number"
-                        value={seed}
-                        onChange={(e) => setSeed(e.target.value)}
-                    />
-                </Form.Group>
-
-                <Form.Group>
-                    <Form.Label>Region</Form.Label>
+                    <Form.Label>Language</Form.Label>
                     <Form.Select value={region} onChange={(e) => setRegion(e.target.value)}>
                         <option value="en">English</option>
                         <option value="fr">French</option>
                     </Form.Select>
                 </Form.Group>
+
+                <Card className="p-2 border border-primary shadow-md">
+                    <Form.Group>
+                        <Form.Label className="fw-bold">Seed</Form.Label>
+                        <div className="d-flex gap-2 align-items-center">
+                            <Form.Control
+                                type="number"
+                                value={seed}
+                                onChange={(e) => setSeed(e.target.value)}
+                                className="flex-grow-1"
+                            />
+                            <Button
+                                onClick={() => setSeed(Math.floor(Math.random() * 100000))}
+                                className="d-flex align-items-center gap-2"
+                                variant="primary"
+                            >
+                                <FaRandom size={20} /> Random
+                            </Button>
+                        </div>
+                    </Form.Group>
+                </Card>
+
 
                 <Form.Group>
                     <Form.Label>Reviews</Form.Label>
@@ -72,12 +85,6 @@ const BookTable = () => {
                     />
                 </Form.Group>
 
-                <Button
-                    onClick={() => setSeed(Math.floor(Math.random() * 100000))}
-                    className="d-flex align-items-center justify-content-center gap-2 random-seed-btn"
-                >
-                    <FaRandom size={20} /> Random Seed
-                </Button>
 
                 <CSVLink
                     data={books}
